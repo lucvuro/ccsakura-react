@@ -1,0 +1,14 @@
+.searchContainer{
+    width: 100%;
+}
+.row{
+    margin-top: 0;
+    margin-left: 0;
+    margin-right:0;
+}
+.autocomplete-container{
+    overflow-y: hidden;
+    height: 300px;
+    position: absolute;
+    width: 60%;
+}

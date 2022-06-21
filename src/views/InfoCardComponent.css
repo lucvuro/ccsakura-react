@@ -1,0 +1,26 @@
+.mb-3{
+    margin-left: 5rem!important;
+}
+.list-group-flush>.list-group-item-fake {
+    border-width: 0 0 1px;
+}
+
+.list-group-item-fake.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.list-group-item-fake:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.list-group-item-fake {
+    
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
