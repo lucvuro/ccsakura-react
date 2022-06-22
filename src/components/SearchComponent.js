@@ -1,8 +1,8 @@
-import '../views/SearchComponent.css';
+import '../components/SearchComponent.css';
 import { useState , useEffect, useRef} from 'react';
 import React from 'react';
 import axios from 'axios';
-import LoadingComponent from './LoadingComponent';
+import LoadingComponent from '../views/LoadingComponent';
 const SearchComponent = (props) => {
     const { fetchData,setShow} = props
     const [value, setValue] = useState('')

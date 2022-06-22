@@ -1,5 +1,5 @@
 import '../views/Nav.css'
-
+import { Link } from 'react-router-dom';
 const Nav = () => {
 
     return (
@@ -13,10 +13,12 @@ const Nav = () => {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                <Link className="nav-link active" to="/">Home</Link>
+                                {/* <a class="nav-link active" aria-current="page" href="/">Home</a> */}
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/">All Cards</a>
+                                <Link className="nav-link" to="/allcards">All Cards</Link>
+                                {/* <a class="nav-link" href="/">All Cards</a> */}
                             </li>
                             
                         </ul>

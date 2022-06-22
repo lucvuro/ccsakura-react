@@ -1,4 +1,4 @@
-import '../views/InfoCardComponent.css'
+import '../components/InfoCardComponent.css'
 import { useEffect, useState } from 'react'
 const InfoCardComponent = (props) => {
     const { data, show } = props

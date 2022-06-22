@@ -1,5 +1,5 @@
-import '../views/InfoComponent.css'
-import InfoCardComponent from './InfoCardComponent';
+import '../components/InfoComponent.css'
+import InfoCardComponent from '../components/InfoCardComponent';
 const InfoComponent = (props) => {
     const {data, show} = props
     return (
