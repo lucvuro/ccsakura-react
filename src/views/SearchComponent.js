@@ -1,13 +1,16 @@
 import '../views/SearchComponent.css';
 import { useState , useEffect, useRef} from 'react';
+import React from 'react';
 import axios from 'axios';
-import AutoCompleteComponent from './AutoCompleteComponent';
+import LoadingComponent from './LoadingComponent';
 const SearchComponent = (props) => {
+    const { fetchData,setShow} = props
     const [value, setValue] = useState('')
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
     const [suggestionsActive, setSuggestionsActive] = useState(false);
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         let fetchData = async () => {
             let res = await axios.get('https://ccsakura-card.herokuapp.com/sakura/api/card/array')
@@ -39,15 +42,19 @@ const SearchComponent = (props) => {
         setSuggestionsActive(false)
     }
     let searchOnClick = async (value) => {
+        setShow(false)
+        setLoading(true)
         let res = await axios.get(`https://ccsakura-card.herokuapp.com/sakura/api/card/${value}`)
         let data = res.data
+        setLoading(false)
         fetchData(data)
         setValue('')
+
     }
     const setvalueOnClick = (item) => {
         setValue(item)
     }
-    const { fetchData } = props
+
     const handleKeyDown = (event) => {
         if (event.keyCode === 38){
             if (suggestionIndex === 0) {
@@ -74,7 +81,7 @@ const SearchComponent = (props) => {
             setSuggestionIndex(0)
         }
     }
-    return (
+    return (<>
         <div className="searchContainer">
             <div className="row">
                 <div className="col-2"></div>
@@ -90,7 +97,7 @@ const SearchComponent = (props) => {
                         <ul className="list-group list-group-flush pt-2">
                             {suggestions.map((item, index) => {
                                 return (
-                                    <li className={index === suggestionIndex ? 'list-group-item active' : 'list-group-item'} key={index} onClick={(event) => handleClickSuggest(item)}>{item}</li>
+                                    <li className={index === suggestionIndex ? 'list-group-item active' : 'list-group-item'}  key={index} onClick={(event) => handleClickSuggest(item)}>{item}</li>
                                 )
                             })}
                         </ul>
@@ -98,11 +105,11 @@ const SearchComponent = (props) => {
                     </div>
                 </div>
                 <div className="col-2">
-
-
                 </div>
             </div>
         </div>
+        {loading && <LoadingComponent/>}
+        </>
     )
 }
 export default SearchComponent;
