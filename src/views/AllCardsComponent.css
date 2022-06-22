@@ -1,14 +1,25 @@
 .list-cards {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card {
     width: 9rem;
     background-color: transparent;
     margin: 70px;
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
 }
-
+.card:hover{
+    -webkit-transform: translate(3em,0);
+    -moz-transform: translate(3em,0);
+    -o-transform: translate(3em,0);
+    -ms-transform: translate(3em,0);
+    transform: scale(1.2)
+}
 /* .card:first-child{
     margin-left:110px
 } */

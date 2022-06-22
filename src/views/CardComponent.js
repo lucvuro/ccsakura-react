@@ -3,7 +3,6 @@ import {useState,useEffect } from 'react'
 import axios from "axios";
 import InfoCardComponent from "../components/InfoCardComponent";
 import LoadingComponent from "./LoadingComponent";
-
 const CardComponent = () => {
     let {name} = useParams()
     const [data, setData] = useState({})
@@ -16,6 +15,7 @@ const CardComponent = () => {
             setLoading(false)
         }
         fetchData()
+        
     }, [])
     return(
         <div className="card-info-container">

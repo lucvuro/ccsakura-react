@@ -34,4 +34,15 @@
 	  transform: rotate(360deg);
 	}
   }
-  
+  .loading{
+	box-sizing: border-box;
+	display: block;
+	margin: 8px;
+  }
+  .img-fluid{
+	width: 100px;
+	height: 80px;
+	margin-top: 250px;
+	display: inline-block;
+	position: relative;
+  }

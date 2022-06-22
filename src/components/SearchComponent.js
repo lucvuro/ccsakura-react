@@ -93,16 +93,17 @@ const SearchComponent = (props) => {
                             onKeyDown={(event) => handleKeyDown(event)} />
                         <button className="btn btn-primary" onClick={() => searchOnClick(value)}>Search</button>
                     </div>
+                    {suggestions.length > 0 &&
                     <div className="autocomplete-container" style={suggestionsActive ? {} : {display: 'none'}}>
                         <ul className="list-group list-group-flush pt-2">
-                            {suggestions.map((item, index) => {
+                            {suggestions && suggestions.length> 0 && suggestions.map((item, index) => {
                                 return (
                                     <li className={index === suggestionIndex ? 'list-group-item active' : 'list-group-item'}  key={index} onClick={(event) => handleClickSuggest(item)}>{item}</li>
                                 )
                             })}
                         </ul>
 
-                    </div>
+                    </div>}
                 </div>
                 <div className="col-2">
                 </div>

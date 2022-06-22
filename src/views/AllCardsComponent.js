@@ -35,6 +35,7 @@ const AllCardsComponent = () => {
         let dataRecived = JSON.parse(localStorage.getItem('data'));
         if (dataRecived) {
          setData(dataRecived);
+         setLoading(false)
         }
       }, []);
     return (<>
