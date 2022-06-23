@@ -3,7 +3,7 @@ import { useEffect, useState} from 'react'
 import cursor from '../assets/images/cursor.png'
 import EditModalComponent from '../views/EditModalComponent'
 const InfoCardComponent = (props) => {
-    const { data, show ,setData,saveDataToLocal} = props
+    const { data, show ,setData,saveDataToLocal,showEdit} = props
     const saveDataEdited = (dataEdited) => {
         saveDataToLocal(dataEdited)
     }
@@ -30,7 +30,7 @@ const InfoCardComponent = (props) => {
                         <li className="list-group-item-fake">Tập anime biến đổi: {data.transformedAnime}</li>
                         <li className="list-group-item-fake">Tập manga biến đổi: {data.transformedManga}</li>
                     </ul>
-                    <EditModalComponent data={data} saveData={saveDataEdited}/>
+                    {showEdit && <EditModalComponent data={data} saveData={saveDataEdited}/>}
                 </div></>}
         </div>
     )

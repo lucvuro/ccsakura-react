@@ -12,6 +12,7 @@ const SearchPage = (props) => {
         <InfoComponent 
         data = {data}
         show = {show}
+        showEdit ={false}
         />
         </>
     )

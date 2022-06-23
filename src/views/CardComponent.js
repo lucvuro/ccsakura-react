@@ -41,7 +41,7 @@ const CardComponent = () => {
     }, [dataEdited])
     return (
         <div className="card-info-container">
-            {!loading && <InfoCardComponent data={data} show={true} setData={setData} saveDataToLocal={saveDataToLocal}/>}
+            {!loading && <InfoCardComponent showEdit={true} data={data} show={true} setData={setData} saveDataToLocal={saveDataToLocal}/>}
             {loading && <LoadingComponent />}
         </div>
     )
