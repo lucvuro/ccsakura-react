@@ -3,18 +3,23 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import LoadingComponent from './LoadingComponent'
-import AddModalComponent from './AddModalComponent'
+import AddModalComponent from '../components/AddModalComponent'
+import { useMediaQuery } from 'react-responsive'
 const AllCardsComponent = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 1223px)' })
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-width: 1224px)'
+    })
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const addCardToData = (childData) => {
         let currentData = data
-        currentData = [childData,...currentData]
+        currentData = [childData, ...currentData]
         setData(currentData)
     }
     const removeCardFromData = (card) => {
         let currentData = data
-        currentData = currentData.filter((item) => item.id !== card.id )
+        currentData = currentData.filter((item) => item.id !== card.id)
         setData(currentData)
     }
     useEffect(() => {
@@ -37,7 +42,7 @@ const AllCardsComponent = () => {
                 }
             }
         }
-        if (localStorage.getItem('data') === null){
+        if (localStorage.getItem('data') === null) {
             fetchData()
         }
         return () => {
@@ -54,25 +59,49 @@ const AllCardsComponent = () => {
     useEffect(() => {
         localStorage.setItem('data', JSON.stringify(data))
 
-    },[data])
+    }, [data])
     return (<>
-        {!loading && <AddModalComponent addCardToData={addCardToData}/>}
-        <div className="list-cards">
-            {data && data.length > 0 &&
-                data.map((item, index) => {
-                    return (
-                        <div className="card fade-in-image" key={index} >
-                            <NavLink to={{ pathname: `card/${item.id}` }}>
-                                <img className="card-img-top" src={item.link_clow} alt={item.nameCard} />
-                            </NavLink>
-                           <button class="btn btn-danger" onClick={() => removeCardFromData(item)}>Delete</button>
-                        </div>
-                    )
-                })}
-            {loading &&
-                <LoadingComponent />
-            }
-        </div>
+        {isDesktopOrLaptop &&
+            <div>
+                {!loading && <AddModalComponent addCardToData={addCardToData} />}
+                <div className="list-cards">
+                    {data && data.length > 0 &&
+                        data.map((item, index) => {
+                            return (
+                                <div className="card fade-in-image" key={index} >
+                                    <NavLink to={{ pathname: `card/${item.id}` }}>
+                                        <img className="card-img-top" src={item.link_clow} alt={item.nameCard} />
+                                    </NavLink>
+                                    <button class="btn btn-danger" onClick={() => removeCardFromData(item)}>Delete</button>
+                                </div>
+                            )
+                        })}
+                    {loading &&
+                        <LoadingComponent />
+                    }
+                </div>
+            </div>}
+        {isMobile &&
+            <div>
+                {!loading && <AddModalComponent addCardToData={addCardToData} />}
+                <div className="list-cards">
+                    {data && data.length > 0 &&
+                        data.map((item, index) => {
+                            return (
+                                <div className="card fade-in-image" key={index} >
+                                    <button class="btn-mobile btn-danger" onClick={() => removeCardFromData(item)}>Delete</button>
+                                    <NavLink to={{ pathname: `card/${item.id}` }}>
+                                        <img className="card-img-top" src={item.link_clow} alt={item.nameCard} />
+                                    </NavLink>
+                                    
+                                </div>
+                            )
+                        })}
+                    {loading &&
+                        <LoadingComponent />
+                    }
+                </div>
+            </div>}
     </>
     )
 }
