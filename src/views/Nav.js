@@ -31,10 +31,10 @@ const Nav = () => {
                                 </li>
 
                             </ul>
-                            <ul class="navbar-nav navbar-right">
+                            {/* <ul class="navbar-nav navbar-right">
                                 <li className="nav-item ml-3"><span className="nav-link"><i class="fa-solid fa-user-plus"></i> Sign Up</span></li>
                                 <li className="nav-item"><span className="nav-link" href="#"><i class="fa-solid fa-right-to-bracket"></i> Login</span></li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </nav>
