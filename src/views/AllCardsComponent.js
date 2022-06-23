@@ -3,9 +3,20 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import LoadingComponent from './LoadingComponent'
+import AddModalComponent from './AddModalComponent'
 const AllCardsComponent = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+    const addCardToData = (childData) => {
+        let currentData = data
+        currentData = [childData,...currentData]
+        setData(currentData)
+    }
+    const removeCardFromData = (card) => {
+        let currentData = data
+        currentData = currentData.filter((item) => item.id !== card.id )
+        setData(currentData)
+    }
     useEffect(() => {
         const ourRequest = axios.CancelToken.source()
         let fetchData = async () => {
@@ -26,7 +37,9 @@ const AllCardsComponent = () => {
                 }
             }
         }
-        fetchData()
+        if (localStorage.getItem('data') === null){
+            fetchData()
+        }
         return () => {
             ourRequest.cancel("Canceled by user")
         }
@@ -34,26 +47,31 @@ const AllCardsComponent = () => {
     useEffect(() => {
         let dataRecived = JSON.parse(localStorage.getItem('data'));
         if (dataRecived) {
-         setData(dataRecived);
-         setLoading(false)
+            setData(dataRecived);
+            setLoading(false)
         }
-      }, []);
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(data))
+
+    },[data])
     return (<>
+        {!loading && <AddModalComponent addCardToData={addCardToData}/>}
         <div className="list-cards">
-            {data && data.length>0 &&
+            {data && data.length > 0 &&
                 data.map((item, index) => {
                     return (
-                        <div className="card fade-in-image" key={item.id} >
-                            <NavLink to={{pathname:`card/${item.nameCard}`}}>
+                        <div className="card fade-in-image" key={index} >
+                            <NavLink to={{ pathname: `card/${item.id}` }}>
                                 <img className="card-img-top" src={item.link_clow} alt={item.nameCard} />
                             </NavLink>
+                           <button class="btn btn-danger" onClick={() => removeCardFromData(item)}>Delete</button>
                         </div>
                     )
                 })}
-            {loading && 
+            {loading &&
                 <LoadingComponent />
             }
-
         </div>
     </>
     )

@@ -1,5 +1,6 @@
 import SearchComponent from "../components/SearchComponent"
 import InfoComponent from "../components/InfoComponent"
+import AllCardsComponent from "./AllCardsComponent"
 
 const SearchPage = (props) => {
     const {fetchData,setShow,data,show} = props

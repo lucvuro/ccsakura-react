@@ -16,9 +16,11 @@ const SearchComponent = (props) => {
             let res = await axios.get('https://ccsakura-card.herokuapp.com/sakura/api/card/array')
             let data = res && res.data ? res.data : []
             setData(data)
+            localStorage.setItem('array',JSON.stringify(data))
         }
         fetchData()
     }, [])
+    
     useEffect(() => {
         const query = value.toLowerCase()
         if (data.includes(value)){
