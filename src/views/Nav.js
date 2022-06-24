@@ -25,10 +25,10 @@ const Nav = () => {
                                     <Link className="nav-link" to="/allcards">All Cards</Link>
                                     {/* <a className="nav-link" href="/">All Cards</a> */}
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <Link className="nav-link" to="/user">User</Link>
                                     {/* <a className="nav-link" href="/">All Cards</a> */}
-                                </li>
+                                </li> */}
 
                             </ul>
                             {/* <ul class="navbar-nav navbar-right">
