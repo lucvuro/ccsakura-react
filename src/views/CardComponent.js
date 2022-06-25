@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import InfoCardComponent from "../components/InfoCardComponent";
 import LoadingComponent from "./LoadingComponent";
+import ErrorComponent from "../components/ErrorComponent";
 const CardComponent = () => {
     let { id } = useParams()
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
     const [dataEdited, setDataEdited] = useState({})
+    const [error, setError] = useState(false)
     const saveDataToLocal = (dataeditedfromform) => {
         let dataRecived = JSON.parse(localStorage.getItem('data'));
         if (dataRecived) {
@@ -36,13 +38,17 @@ const CardComponent = () => {
             if (dataRecived.length > 0) {
                 setData(dataRecived[0])
                 setLoading(false)
+            }else{
+                setLoading(false)
+                setError(true)
             }
         }
     }, [dataEdited])
     return (
         <div className="card-info-container">
-            {!loading && <InfoCardComponent showEdit={true} data={data} show={true} setData={setData} saveDataToLocal={saveDataToLocal}/>}
+            {!loading && !error && <InfoCardComponent showEdit={true} data={data} show={true} setData={setData} saveDataToLocal={saveDataToLocal}/>}
             {loading && <LoadingComponent />}
+            {error && <ErrorComponent/>}
         </div>
     )
 }
